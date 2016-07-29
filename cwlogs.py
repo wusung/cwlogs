@@ -38,24 +38,28 @@ if args.log:
 if args.prefix:
     PREFIX = args.prefix
 
-aws_args = []
-aws_args.append("awslogs get " + LOGGROUPNAME + " --start='%s' --no-color" % SINCE)
+def main():
+    aws_args = []
+    aws_args.append("awslogs get " + LOGGROUPNAME + " --start='%s' --no-color" % SINCE)
 
-proc = subprocess.Popen(aws_args, stdout=subprocess.PIPE, shell=True)
-(out, err) = proc.communicate()
-for line in out.splitlines():
-    l = line.decode('utf-8')
-    group_name = l.split(' ')[0]
-    logger_name = l.split(' ')[1]
-    content = l.split(' ')[2:]
-    o = json.loads(' '.join(content))
-    d = dateutil.parser.parse(o.get('time'))
-    ts = calendar.timegm(d.utctimetuple()) 
-    print("%s %s [%s] %s - %s %s" % (
-          datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S'),
-          o.get('level'),
-          o.get('thread'),
-          o.get('hostname'),
-          o.get('class'), 
+    proc = subprocess.Popen(aws_args, stdout=subprocess.PIPE, shell=True)
+    (out, err) = proc.communicate()
+    for line in out.splitlines():
+        l = line.decode('utf-8')
+        group_name = l.split(' ')[0]
+        logger_name = l.split(' ')[1]
+        content = l.split(' ')[2:]
+        o = json.loads(' '.join(content))
+        d = dateutil.parser.parse(o.get('time'))
+        ts = calendar.timegm(d.utctimetuple()) 
+        print("%s %s [%s] %s - %s %s" % (
+              datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S'),
+              o.get('level'),
+              o.get('thread'),
+              o.get('hostname'),
+              o.get('class'), 
           o.get('message')))
+
+if __name__ == '__main__':
+    main()
 
