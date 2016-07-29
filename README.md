@@ -3,5 +3,5 @@
 ### How to install 
 
 ```
-curl -L https://raw.githubusercontent.com/wusung/common-utils/master/installer.sh | bash
+pip install --upgrade git+https://github.com/wusung/cwlogs.git
 ```

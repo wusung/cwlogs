@@ -17,4 +17,5 @@ setup(
     py_modules=[PACKAGE],
     entry_points={
     'console_scripts': ['%s = %s:main' % (PACKAGE, PACKAGE)],},
+    install_requires=REQUIRES,
 )
