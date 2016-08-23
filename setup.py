@@ -11,6 +11,9 @@ with open('VERSION') as f:
 REQUIRES = [
 ]
 
+with open('requirements.txt') as f:
+    REQUIRES.append(f.read().rstrip())
+
 setup(
     name=PACKAGE,
     version=VERSION,
