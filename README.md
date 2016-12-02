@@ -1,4 +1,4 @@
-# The command line wrapper or awslogs
+# The Command Line Wrapper for awslogs
 
 ### How to install 
 
