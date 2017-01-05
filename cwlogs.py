@@ -12,7 +12,7 @@ import subprocess
 
 # Set up timezone to local
 os.environ['TZ']='Asia/Taipei'
-parser = argparse.ArgumentParser(description='Process some integers.')
+parser = argparse.ArgumentParser(description='Format cloud watch log more pretty.')
 parser.add_argument('-o', '--hour', help='Specify hor rage to limit the log')
 parser.add_argument('-d', '--day', help='Specify day rage to limit the log')
 parser.add_argument('-l', '--log', help='Specify aws log group name')
